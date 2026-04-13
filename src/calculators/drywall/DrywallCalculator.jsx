@@ -4,19 +4,15 @@ import SelectField from '../../components/SelectField.jsx'
 import SectionCard from '../../components/SectionCard.jsx'
 import ResultsPanel from '../../components/ResultsPanel.jsx'
 import { calcDrywall } from './drywallCalc.js'
+import { BATT_OPTIONS } from '../../utils/constants.js'
 
 const INSULATION_TYPE_OPTIONS = [
-  { value: 'batt', label: 'Batt (walls)' },
+  { value: 'batt',  label: 'Batt (walls)' },
   { value: 'blown', label: 'Blown-in (ceiling/attic)' },
   { value: 'rigid', label: 'Rigid foam (walls)' },
 ]
 
-const WALL_R_OPTIONS = [
-  { value: '13', label: 'R-13 (2×4 wall)' },
-  { value: '15', label: 'R-15 (2×4 wall, high-density)' },
-  { value: '19', label: 'R-19 (2×6 wall)' },
-  { value: '21', label: 'R-21 (2×6 wall, high-density)' },
-]
+const BATT_R_OPTIONS = Object.keys(BATT_OPTIONS).map(r => ({ value: r, label: r }))
 
 const CEILING_R_OPTIONS = [
   { value: '30', label: 'R-30' },
@@ -29,12 +25,20 @@ export default function DrywallCalculator() {
   const [inputs, setInputs] = useState({
     roomLength: '', roomWidth: '', ceilingHeight: '8',
     numDoors: '1', numWindows: '2',
-    insulationType: 'batt', wallInsulationR: '13', ceilingInsulationR: '38',
+    insulationType: 'batt',
+    battR: 'R-13', battSizeIdx: '0',
+    ceilingInsulationR: '38',
   })
 
   const set = (key) => (val) => setInputs(prev => ({ ...prev, [key]: val }))
 
+  // When R-value changes, reset size to first option
+  const setBattR = (val) => setInputs(prev => ({ ...prev, battR: val, battSizeIdx: '0' }))
+
   const results = useMemo(() => calcDrywall(inputs), [inputs])
+
+  const battSizes = BATT_OPTIONS[inputs.battR] || []
+  const battSizeOptions = battSizes.map((s, i) => ({ value: String(i), label: s.label }))
 
   return (
     <div>
@@ -57,11 +61,20 @@ export default function DrywallCalculator() {
       </SectionCard>
 
       <SectionCard title="Insulation">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <SelectField label="Insulation Type" value={inputs.insulationType} onChange={set('insulationType')} options={INSULATION_TYPE_OPTIONS} />
+
           {inputs.insulationType === 'batt' && (
-            <SelectField label="Wall R-Value" value={inputs.wallInsulationR} onChange={set('wallInsulationR')} options={WALL_R_OPTIONS} />
+            <>
+              <SelectField label="R-Value" value={inputs.battR} onChange={setBattR} options={BATT_R_OPTIONS} />
+              {battSizeOptions.length > 1 && (
+                <div className="sm:col-span-2">
+                  <SelectField label="Pack Size" value={inputs.battSizeIdx} onChange={set('battSizeIdx')} options={battSizeOptions} />
+                </div>
+              )}
+            </>
           )}
+
           {inputs.insulationType === 'blown' && (
             <SelectField label="Ceiling R-Value" value={inputs.ceilingInsulationR} onChange={set('ceilingInsulationR')} options={CEILING_R_OPTIONS} />
           )}
