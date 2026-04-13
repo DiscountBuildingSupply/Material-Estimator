@@ -4,12 +4,14 @@ import FramingCalculator from './calculators/framing/FramingCalculator.jsx'
 import ConcreteCalculator from './calculators/concrete/ConcreteCalculator.jsx'
 import RoofingCalculator from './calculators/roofing/RoofingCalculator.jsx'
 import DrywallCalculator from './calculators/drywall/DrywallCalculator.jsx'
+import SidingCalculator from './calculators/siding/SidingCalculator.jsx'
 
 const CALCULATORS = {
   framing:  <FramingCalculator />,
   concrete: <ConcreteCalculator />,
   roofing:  <RoofingCalculator />,
   drywall:  <DrywallCalculator />,
+  siding:   <SidingCalculator />,
 }
 
 export default function App() {
