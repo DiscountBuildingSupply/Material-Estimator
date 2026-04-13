@@ -6,6 +6,7 @@ import ResultsPanel from '../../components/ResultsPanel.jsx'
 import { calcFraming } from './framingCalc.js'
 
 const SPACING_OPTIONS = [
+  { value: '12', label: '12" on center' },
   { value: '16', label: '16" on center (standard)' },
   { value: '24', label: '24" on center' },
 ]
