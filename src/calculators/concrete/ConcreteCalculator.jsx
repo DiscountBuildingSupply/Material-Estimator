@@ -25,6 +25,11 @@ const MORTAR_APP_OPTIONS = [
   { value: 'stone',     label: 'Stone / Brick / Pointing' },
 ]
 
+const MORTAR_METHOD_OPTIONS = [
+  { value: 'coosa',   label: 'Coosa Type S (75 lb) + Mortar Sand (scooped)' },
+  { value: 'scratch', label: 'From Scratch (Portland + lime + bagged sand)' },
+]
+
 export default function ConcreteCalculator() {
   const [inputs, setInputs] = useState({
     subType: 'slab',
@@ -32,6 +37,7 @@ export default function ConcreteCalculator() {
     depth: '', height: '',
     rebarSpacing: '12',
     mortarApp: 'blockWall',
+    mortarMethod: 'coosa',
   })
 
   const set = (key) => (val) => setInputs(prev => ({ ...prev, [key]: val }))
@@ -58,6 +64,14 @@ export default function ConcreteCalculator() {
       {/* Type S Mortar */}
       {isMortar && (
         <>
+          <SectionCard title="Mix Method">
+            <SelectField label="How are you mixing?" value={inputs.mortarMethod} onChange={set('mortarMethod')} options={MORTAR_METHOD_OPTIONS} />
+            <p className="text-xs text-slate-400 mt-2">
+              {inputs.mortarMethod === 'coosa'
+                ? 'Coosa Type S 75 lb bags (pre-blended Portland + lime) + mortar sand sold by the half-ton.'
+                : 'Separate Portland cement (94 lb), hydrated lime (50 lb), and bagged mason sand (60 lb).'}
+            </p>
+          </SectionCard>
           <SectionCard title="Application">
             <div className="max-w-xs">
               <SelectField label="Mortar Application" value={inputs.mortarApp} onChange={set('mortarApp')} options={MORTAR_APP_OPTIONS} />
@@ -73,9 +87,6 @@ export default function ConcreteCalculator() {
               <InputField label="Wall Length" value={inputs.length} onChange={set('length')} unit="ft" />
               <InputField label="Wall Height" value={inputs.height} onChange={set('height')} unit="ft" />
             </div>
-            <p className="text-xs text-slate-400 mt-2">
-              Type S mix ratio: 1 part Portland cement : ½ part hydrated lime : 4½ parts mason sand
-            </p>
           </SectionCard>
         </>
       )}

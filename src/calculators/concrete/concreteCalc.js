@@ -5,9 +5,15 @@ import { CONCRETE_BAG_CUFT, REBAR_STICK_FT, BLOCK_FACE_SQFT, MORTAR_PER_BLOCK } 
 // Per 1 cu ft of mortar:
 const TYPE_S_PORTLAND_PER_CUFT = 1 / 6         // bags (94 lb ≈ 1 cu ft)
 const TYPE_S_LIME_PER_CUFT     = 0.5 / 6       // bags (50 lb ≈ 1 cu ft)
-const TYPE_S_SAND_PER_CUFT     = 4.5 / 6       // cu ft of mason sand
+const TYPE_S_SAND_PER_CUFT     = 4.5 / 6       // cu ft of mason sand per cu ft mortar
 const SAND_LBS_PER_CUFT        = 100            // ~100 lbs per cu ft mason sand
 const SAND_BAG_LBS             = 60             // 60 lb bags of mason sand
+
+// Coosa Type S pre-blended bag (75 lb): ~0.56 cu ft yield per bag
+const COOSA_BAG_CUFT           = 0.56
+// Mortar sand sold by half-ton (1,000 lbs); sand ≈ 100 lbs/cu ft → 10 cu ft/half-ton
+const MORTAR_SAND_LBS_PER_HALF_TON = 1000
+const MORTAR_SAND_LBS_PER_CUFT    = 100
 
 // CMU mortar volume: ~0.03 cu ft per block face (8×8×16 at 3/8" joints)
 const MORTAR_CUFT_PER_BLOCK    = 0.03
@@ -26,7 +32,8 @@ export function calcConcrete(inputs) {
   const depth         = toNum(inputs.depth)
   const height        = toNum(inputs.height)
   const rebarSpacing  = toNum(inputs.rebarSpacing, 12)
-  const mortarApp     = inputs.mortarApp || 'blockWall'
+  const mortarApp     = inputs.mortarApp    || 'blockWall'
+  const mortarMethod  = inputs.mortarMethod || 'scratch'
 
   const items = []
 
@@ -103,15 +110,26 @@ export function calcConcrete(inputs) {
       areaNote       = `${length}′ × ${height}′ = ${roundTo(wallArea)} sq ft wall face`
     }
 
-    const portlandBags = ceilTo(mortarCuFt * TYPE_S_PORTLAND_PER_CUFT)
-    const limeBags     = ceilTo(mortarCuFt * TYPE_S_LIME_PER_CUFT)
-    const sandCuFt     = roundTo(mortarCuFt * TYPE_S_SAND_PER_CUFT)
-    const sandBags60   = ceilTo((sandCuFt * SAND_LBS_PER_CUFT) / SAND_BAG_LBS)
-
     items.push({ name: 'Mortar Volume (estimated)', qty: roundTo(mortarCuFt), unit: 'cu ft', note: areaNote })
-    items.push({ name: 'Portland Cement (94 lb bags)', qty: portlandBags, unit: 'bags', note: 'Type S ratio: 1 part Portland' })
-    items.push({ name: 'Hydrated Lime (50 lb bags)', qty: limeBags, unit: 'bags', note: 'Type S ratio: 0.5 part lime' })
-    items.push({ name: 'Mason Sand (60 lb bags)', qty: sandBags60, unit: 'bags', note: `${sandCuFt} cu ft — Type S ratio: 4.5 parts sand` })
+
+    if (mortarMethod === 'scratch') {
+      // Portland + lime + bagged mason sand
+      const portlandBags = ceilTo(mortarCuFt * TYPE_S_PORTLAND_PER_CUFT)
+      const limeBags     = ceilTo(mortarCuFt * TYPE_S_LIME_PER_CUFT)
+      const sandCuFt     = roundTo(mortarCuFt * TYPE_S_SAND_PER_CUFT)
+      const sandBags60   = ceilTo((sandCuFt * SAND_LBS_PER_CUFT) / SAND_BAG_LBS)
+      items.push({ name: 'Portland Cement (94 lb bags)', qty: portlandBags, unit: 'bags', note: 'Type S ratio: 1 part Portland' })
+      items.push({ name: 'Hydrated Lime (50 lb bags)',   qty: limeBags,     unit: 'bags', note: 'Type S ratio: 0.5 part lime' })
+      items.push({ name: 'Mason Sand (60 lb bags)',       qty: sandBags60,   unit: 'bags', note: `${sandCuFt} cu ft — Type S ratio: 4.5 parts sand` })
+    } else {
+      // Coosa Type S pre-blended + mortar sand by half-ton
+      const coosaBags       = ceilTo(mortarCuFt / COOSA_BAG_CUFT)
+      const sandCuFt        = roundTo(mortarCuFt * TYPE_S_SAND_PER_CUFT)
+      const sandLbs         = sandCuFt * MORTAR_SAND_LBS_PER_CUFT
+      const halfTons        = ceilTo(sandLbs / MORTAR_SAND_LBS_PER_HALF_TON, 1)
+      items.push({ name: 'Coosa Type S (75 lb bags)',     qty: coosaBags, unit: 'bags',      note: `~${COOSA_BAG_CUFT} cu ft yield per bag` })
+      items.push({ name: 'Mortar Sand (scooped)',          qty: halfTons,  unit: 'half-tons', note: `~${roundTo(sandLbs)} lbs / ${sandCuFt} cu ft needed` })
+    }
   }
 
   // ── Site-Mixed Concrete (Portland + sand + gravel) ───────────────────────────
