@@ -5,11 +5,27 @@ export const REBAR_STICK_FT = 20        // standard rebar stick length
 export const BLOCK_FACE_SQFT = 0.888    // 8" tall x 16" long nominal CMU face area
 export const CONCRETE_BAG_CUFT = 0.60  // 80 lb bag yield in cubic feet
 export const MORTAR_PER_BLOCK = 0.25   // 60 lb bags of mortar per CMU block
-export const BATT_COVERAGE = {          // sq ft per bag at standard 16" OC
-  13: 40,
-  15: 32,
-  19: 48,
-  21: 35,
+// Batt insulation products: { label, coverage (sq ft per pack) }
+export const BATT_OPTIONS = {
+  'R-11': [
+    { label: '15"×93" batts — 155 sq ft/pack',  coverage: 155 },
+    { label: '23"×93" batts — 235 sq ft/pack',  coverage: 235 },
+  ],
+  'R-13': [
+    { label: "15\"×8' batts — 125.94 sq ft/pack",  coverage: 125.94 },
+    { label: "15\"×9' batts — 131.25 sq ft/pack",  coverage: 131.25 },
+  ],
+  'R-19': [
+    { label: '6¼"×15" batts — 77.5 sq ft/pack',   coverage: 77.5 },
+    { label: '6"×23" batts — 118.83 sq ft/pack',   coverage: 118.83 },
+  ],
+  'R-30': [
+    { label: '10"×15" batts — 58.87 sq ft/pack',   coverage: 58.87 },
+    { label: '10"×23" batts — 88.67 sq ft/pack',   coverage: 88.67 },
+  ],
+  'Roxul': [
+    { label: 'Roxul Soundproofing — 59.7 sq ft/pack', coverage: 59.7 },
+  ],
 }
 export const UNDERLAYMENT_ROLL_SQFT = {
   '15lb': 400,

@@ -8,7 +8,7 @@ import {
   SCREW_SQFT_PER_LB,
   DOOR_SQFT,
   WINDOW_SQFT,
-  BATT_COVERAGE,
+  BATT_OPTIONS,
 } from '../../utils/constants.js'
 
 export function calcDrywall(inputs) {
@@ -18,7 +18,8 @@ export function calcDrywall(inputs) {
   const numDoors           = toNum(inputs.numDoors, 0)
   const numWindows         = toNum(inputs.numWindows, 0)
   const insulationType     = inputs.insulationType || 'batt'
-  const wallInsulationR    = toNum(inputs.wallInsulationR, 13)
+  const battR              = inputs.battR || 'R-13'
+  const battSizeIdx        = toNum(inputs.battSizeIdx, 0)
   const ceilingInsulationR = toNum(inputs.ceilingInsulationR, 38)
 
   if (roomLength <= 0 || roomWidth <= 0) return []
@@ -46,10 +47,10 @@ export function calcDrywall(inputs) {
 
   // Insulation
   if (insulationType === 'batt' && netWallArea > 0) {
-    const rKey    = [13, 15, 19, 21].includes(wallInsulationR) ? wallInsulationR : 13
-    const coverage = BATT_COVERAGE[rKey]
-    const battBags = ceilTo(netWallArea / coverage)
-    items.push({ name: `Batt Insulation (R-${wallInsulationR})`, qty: battBags, unit: 'bags/bundles', note: `Wall area: ${roundTo(netWallArea)} sq ft` })
+    const sizes    = BATT_OPTIONS[battR] || BATT_OPTIONS['R-13']
+    const size     = sizes[Math.min(battSizeIdx, sizes.length - 1)]
+    const packs    = ceilTo(netWallArea / size.coverage)
+    items.push({ name: `Batt Insulation (${battR})`, qty: packs, unit: 'packs', note: `${size.label} — ${roundTo(netWallArea)} sq ft wall area` })
   }
 
   if (insulationType === 'blown' && ceilingArea > 0) {
