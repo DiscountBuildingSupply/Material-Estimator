@@ -14,7 +14,7 @@ const newArea = () => ({ id: nextId++, shape: 'rect', length: '', width: '', dia
 export default function LandscapingCalculator() {
   const [areas,    setAreas]    = useState([newArea()])
   const [depth,    setDepth]    = useState('3')
-  const [material, setMaterial] = useState('mulch-hardwood')
+  const [material, setMaterial] = useState('mulch')
 
   const addArea    = () => setAreas(prev => [...prev, newArea()])
   const removeArea = (id) => setAreas(prev => prev.filter(a => a.id !== id))

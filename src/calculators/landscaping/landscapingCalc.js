@@ -2,11 +2,11 @@ import { toNum, ceilTo, roundTo } from '../../utils/math.js'
 
 // Weight in lbs per cubic yard for each material
 export const MATERIAL_WEIGHTS = {
-  'mulch-hardwood': { label: 'Hardwood Mulch',   lbsPerCuYd: 600  },
-  'mulch-pine':     { label: 'Pine/Cedar Mulch',  lbsPerCuYd: 400  },
-  'pea-gravel':     { label: 'Pea Gravel',         lbsPerCuYd: 2700 },
-  'river-rock':     { label: 'River Rock',          lbsPerCuYd: 2800 },
-  'crushed-stone':  { label: 'Crushed Stone',       lbsPerCuYd: 2900 },
+  'mulch':          { label: 'Mulch',           lbsPerCuYd: 600  },
+  'pea-gravel':     { label: 'Pea Gravel',      lbsPerCuYd: 2700 },
+  'river-rock':     { label: 'River Rock',       lbsPerCuYd: 2800 },
+  'three-quarter':  { label: '3/4" Gravel',      lbsPerCuYd: 2800 },
+  'crush-n-run':    { label: "Crush n' Run",     lbsPerCuYd: 2900 },
 }
 
 const HALF_TON_LBS = 1000   // half-ton = 1,000 lbs
@@ -19,7 +19,7 @@ export function calcLandscaping(inputs) {
   if (depthIn <= 0 || areas.length === 0) return []
 
   const depthFt   = depthIn / 12
-  const matInfo   = MATERIAL_WEIGHTS[material] || MATERIAL_WEIGHTS['mulch-hardwood']
+  const matInfo   = MATERIAL_WEIGHTS[material] || MATERIAL_WEIGHTS['mulch']
 
   let totalCuFt = 0
   const areaBreakdown = []
