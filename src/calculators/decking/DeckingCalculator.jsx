@@ -29,7 +29,8 @@ export default function DeckingCalculator() {
     postSpacing:     '8',
     joistSpacing:    '16',
     boardLength:     '16',
-    attachedToHouse: true,
+    attachedToHouse:  true,
+    pressureTreated:  true,
   })
 
   const set = (key) => (val) => setInputs(prev => ({ ...prev, [key]: val }))
@@ -61,18 +62,32 @@ export default function DeckingCalculator() {
       </SectionCard>
 
       <SectionCard title="Options">
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={inputs.attachedToHouse}
-            onChange={e => setInputs(prev => ({ ...prev, attachedToHouse: e.target.checked }))}
-            className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
-          />
-          <div>
-            <span className="text-sm text-slate-700">Attached to house (ledger mount)</span>
-            <p className="text-xs text-slate-400 mt-0.5">Adds a 2×10 ledger board and reduces post rows on the house side.</p>
-          </div>
-        </label>
+        <div className="flex flex-col gap-3">
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={inputs.attachedToHouse}
+              onChange={e => setInputs(prev => ({ ...prev, attachedToHouse: e.target.checked }))}
+              className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
+            />
+            <div>
+              <span className="text-sm text-slate-700">Attached to house (ledger mount)</span>
+              <p className="text-xs text-slate-400 mt-0.5">Adds a 2×10 ledger board and reduces post rows on the house side.</p>
+            </div>
+          </label>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={inputs.pressureTreated}
+              onChange={e => setInputs(prev => ({ ...prev, pressureTreated: e.target.checked }))}
+              className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
+            />
+            <div>
+              <span className="text-sm text-slate-700">Pressure treated framing lumber</span>
+              <p className="text-xs text-slate-400 mt-0.5">PT stock available up to 16′. Uncheck for KD/untreated (up to 24′).</p>
+            </div>
+          </label>
+        </div>
       </SectionCard>
 
       <ResultsPanel items={results} />

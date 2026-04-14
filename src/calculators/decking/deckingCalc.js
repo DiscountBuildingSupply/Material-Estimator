@@ -8,7 +8,8 @@ const MAX_BEAM_SPAN_FT       = 8
 const CONCRETE_BAGS_PER_POST = 2
 const POST_STANDARD_LENGTHS  = [6, 8, 10, 12, 14]
 
-const STOCK_LENGTHS = [8, 10, 12, 14, 16, 18, 20, 22, 24]  // available 2× stock
+const STOCK_LENGTHS_PT  = [8, 10, 12, 14, 16]               // pressure treated max 16′
+const STOCK_LENGTHS_KD  = [8, 10, 12, 14, 16, 18, 20, 22, 24]  // untreated/KD up to 24′
 
 const DECK_SCREWS_PER_SQFT = 2 / (TREX_BOARD_WIDTH_IN / 12)
 const SCREWS_PER_LB        = 200
@@ -44,8 +45,11 @@ export function calcDecking(inputs) {
   const deckHeight     = toNum(inputs.deckHeight, 2)
   const postSpacing    = toNum(inputs.postSpacing, 8)
   const joistSpacing   = toNum(inputs.joistSpacing, 16)
-  const boardLength    = toNum(inputs.boardLength, 16)
+  const boardLength     = toNum(inputs.boardLength, 16)
   const attachedToHouse = inputs.attachedToHouse !== false
+  const pressureTreated = inputs.pressureTreated !== false
+  const STOCK_LENGTHS   = pressureTreated ? STOCK_LENGTHS_PT : STOCK_LENGTHS_KD
+  const lumberLabel     = pressureTreated ? 'PT' : 'KD'
 
   if (deckLength <= 0 || deckWidth <= 0) return []
 
@@ -118,27 +122,27 @@ export function calcDecking(inputs) {
       note: `${trexRows} rows × ${boardsPerRow} boards/row (+10% waste)`,
     },
     {
-      name: `6×6×${postLength}′ PT Posts`,
+      name: `6×6×${postLength}′ ${lumberLabel} Posts`,
       qty: totalPosts, unit: 'posts',
       note: `${postsPerRow} posts/row × ${beamRowCount} beam row${beamRowCount > 1 ? 's' : ''}`,
     },
     {
-      name: `2×10×${beamStock.stockLength}′ PT Beam Stock (doubled)`,
+      name: `2×10×${beamStock.stockLength}′ ${lumberLabel} Beam Stock (doubled)`,
       qty: beamBoards, unit: 'boards',
       note: `${beamRowCount} row${beamRowCount > 1 ? 's' : ''} × 2 boards each — ${beamStock.count} board${beamStock.count > 1 ? 's' : ''} per row covers ${deckLength}′`,
     },
     {
-      name: `2×8×${joistStockLen}′ PT Joists (${joistSpacing}" OC)`,
+      name: `2×8×${joistStockLen}′ ${lumberLabel} Joists (${joistSpacing}" OC)`,
       qty: joistBoards, unit: 'boards',
       note: `${joistCount} joists spanning ${deckWidth}′`,
     },
     {
-      name: '2×8 PT Rim Joists',
+      name: `2×8 ${lumberLabel} Rim Joists`,
       qty: totalRimBoards, unit: 'boards',
       note: `2× ${sideRimStock}′ sides + ${longRimStock.count * longRimRows}× ${longRimStock.stockLength}′ long ${attachedToHouse ? 'outer rim' : 'rims'}`,
     },
     ...(attachedToHouse ? [{
-      name: `2×10×${ledgerStock.stockLength}′ PT Ledger Board`,
+      name: `2×10×${ledgerStock.stockLength}′ ${lumberLabel} Ledger Board`,
       qty: ledgerBoards, unit: 'boards',
       note: `${deckLength}′ along house`,
     }] : []),
