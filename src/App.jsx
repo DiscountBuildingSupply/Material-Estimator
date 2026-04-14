@@ -5,13 +5,15 @@ import ConcreteCalculator from './calculators/concrete/ConcreteCalculator.jsx'
 import RoofingCalculator from './calculators/roofing/RoofingCalculator.jsx'
 import DrywallCalculator from './calculators/drywall/DrywallCalculator.jsx'
 import SidingCalculator from './calculators/siding/SidingCalculator.jsx'
+import LandscapingCalculator from './calculators/landscaping/LandscapingCalculator.jsx'
 
 const CALCULATORS = {
-  framing:  <FramingCalculator />,
-  concrete: <ConcreteCalculator />,
-  roofing:  <RoofingCalculator />,
-  drywall:  <DrywallCalculator />,
-  siding:   <SidingCalculator />,
+  framing:      <FramingCalculator />,
+  concrete:     <ConcreteCalculator />,
+  roofing:      <RoofingCalculator />,
+  drywall:      <DrywallCalculator />,
+  siding:       <SidingCalculator />,
+  landscaping:  <LandscapingCalculator />,
 }
 
 export default function App() {
