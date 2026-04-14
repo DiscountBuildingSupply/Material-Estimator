@@ -70,6 +70,20 @@ const NAV_ITEMS = [
     ),
   },
   {
+    id: 'fencing',
+    label: 'Fencing',
+    description: 'Posts, rails, pickets',
+    activeColor: 'bg-orange-500',
+    activeBg: 'bg-orange-50',
+    activeText: 'text-orange-700',
+    activeBorder: 'border-orange-200',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16M8 3v18M16 3v18" />
+      </svg>
+    ),
+  },
+  {
     id: 'landscaping',
     label: 'Landscaping',
     description: 'Mulch & gravel by half-ton',
