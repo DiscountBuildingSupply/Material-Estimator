@@ -70,6 +70,20 @@ const NAV_ITEMS = [
     ),
   },
   {
+    id: 'decking',
+    label: 'Decking',
+    description: 'Trex, framing, hardware',
+    activeColor: 'bg-amber-600',
+    activeBg: 'bg-amber-50',
+    activeText: 'text-amber-800',
+    activeBorder: 'border-amber-300',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 12h16M4 16h16M8 4v16M12 4v16M16 4v16" />
+      </svg>
+    ),
+  },
+  {
     id: 'fencing',
     label: 'Fencing',
     description: 'Posts, rails, pickets',

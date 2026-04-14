@@ -7,6 +7,7 @@ import DrywallCalculator from './calculators/drywall/DrywallCalculator.jsx'
 import SidingCalculator from './calculators/siding/SidingCalculator.jsx'
 import LandscapingCalculator from './calculators/landscaping/LandscapingCalculator.jsx'
 import FencingCalculator from './calculators/fencing/FencingCalculator.jsx'
+import DeckingCalculator from './calculators/decking/DeckingCalculator.jsx'
 
 const CALCULATORS = {
   framing:      <FramingCalculator />,
@@ -14,6 +15,7 @@ const CALCULATORS = {
   roofing:      <RoofingCalculator />,
   drywall:      <DrywallCalculator />,
   siding:       <SidingCalculator />,
+  decking:      <DeckingCalculator />,
   fencing:      <FencingCalculator />,
   landscaping:  <LandscapingCalculator />,
 }
