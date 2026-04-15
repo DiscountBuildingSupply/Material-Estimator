@@ -2,11 +2,12 @@ import { toNum, ceilTo, roundTo } from '../../utils/math.js'
 
 // Weight in lbs per cubic yard for each material
 export const MATERIAL_WEIGHTS = {
-  'mulch':          { label: 'Mulch',           lbsPerCuYd: 600  },
-  'pea-gravel':     { label: 'Pea Gravel',      lbsPerCuYd: 2700 },
-  'river-rock':     { label: 'River Rock',       lbsPerCuYd: 2800 },
-  'three-quarter':  { label: '3/4" Gravel',      lbsPerCuYd: 2800 },
-  'crush-n-run':    { label: "Crush n' Run",     lbsPerCuYd: 2900 },
+  'topsoil':        { label: 'Topsoil',          lbsPerCuYd: 2200 },
+  'mulch':          { label: 'Mulch',             lbsPerCuYd: 600  },
+  'pea-gravel':     { label: 'Pea Gravel',        lbsPerCuYd: 2700 },
+  'river-rock':     { label: 'River Rock',         lbsPerCuYd: 2800 },
+  'three-quarter':  { label: '3/4" Gravel',        lbsPerCuYd: 2800 },
+  'crush-n-run':    { label: "Crush n' Run",       lbsPerCuYd: 2900 },
 }
 
 const HALF_TON_LBS = 1000   // half-ton = 1,000 lbs

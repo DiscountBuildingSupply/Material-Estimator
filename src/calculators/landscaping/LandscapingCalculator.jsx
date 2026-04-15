@@ -27,8 +27,8 @@ export default function LandscapingCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Landscaping</h2>
-        <p className="text-sm text-slate-500 mt-1">Calculate half-ton quantities of mulch or gravel for rectangular and circular areas.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Landscaping</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Calculate half-ton quantities of mulch or gravel for rectangular and circular areas.</p>
       </div>
 
       <SectionCard title="Material & Depth">
@@ -41,21 +41,21 @@ export default function LandscapingCalculator() {
       <SectionCard title="Areas">
         <div className="flex flex-col gap-4">
           {areas.map((area, i) => (
-            <div key={area.id} className="border border-slate-100 rounded-lg p-3 bg-slate-50">
+            <div key={area.id} className="border border-slate-100 dark:border-slate-600 rounded-lg p-3 bg-slate-50 dark:bg-slate-700/50">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-slate-600">Area {i + 1}</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Area {i + 1}</span>
                 <div className="flex items-center gap-3">
                   {/* Shape toggle */}
-                  <div className="flex rounded-lg border border-slate-200 overflow-hidden text-xs">
+                  <div className="flex rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden text-xs">
                     <button
                       onClick={() => updateArea(area.id, 'shape', 'rect')}
-                      className={`px-3 py-1.5 transition-colors ${area.shape === 'rect' ? 'bg-brand-500 text-white font-medium' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
+                      className={`px-3 py-1.5 transition-colors ${area.shape === 'rect' ? 'bg-brand-500 text-white font-medium' : 'bg-white dark:bg-slate-700 text-slate-500 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600'}`}
                     >
                       Rectangle
                     </button>
                     <button
                       onClick={() => updateArea(area.id, 'shape', 'circle')}
-                      className={`px-3 py-1.5 transition-colors ${area.shape === 'circle' ? 'bg-brand-500 text-white font-medium' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
+                      className={`px-3 py-1.5 transition-colors ${area.shape === 'circle' ? 'bg-brand-500 text-white font-medium' : 'bg-white dark:bg-slate-700 text-slate-500 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600'}`}
                     >
                       Circle
                     </button>

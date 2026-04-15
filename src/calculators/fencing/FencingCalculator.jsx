@@ -42,8 +42,8 @@ export default function FencingCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Fencing</h2>
-        <p className="text-sm text-slate-500 mt-1">Estimate pressure treated fence materials — posts, rails, pickets, and concrete.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Fencing</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Estimate pressure treated fence materials — posts, rails, pickets, and concrete.</p>
       </div>
 
       <SectionCard title="Fence Specifications">
@@ -69,7 +69,7 @@ export default function FencingCalculator() {
                 min={0}
                 step="any"
                 placeholder="length"
-                className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-full bg-white"
+                className="border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-full bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
               />
               <span className="text-xs text-slate-400 w-4 shrink-0">ft</span>
               {sections.length > 1 && (
@@ -105,7 +105,7 @@ export default function FencingCalculator() {
             onChange={e => setIncludePickets(e.target.checked)}
             className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
           />
-          <span className="text-sm text-slate-700">Include 1×6 dog-ear pickets (privacy fence)</span>
+          <span className="text-sm text-slate-700 dark:text-slate-300">Include 1×6 dog-ear pickets (privacy fence)</span>
         </label>
       </SectionCard>
 

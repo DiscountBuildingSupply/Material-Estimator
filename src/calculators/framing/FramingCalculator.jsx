@@ -31,8 +31,8 @@ export default function FramingCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Framing / Lumber</h2>
-        <p className="text-sm text-slate-500 mt-1">Calculate studs, plates, joists, sheathing, and rafters. Fill in only the sections that apply.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Framing / Lumber</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Calculate studs, plates, joists, sheathing, and rafters. Fill in only the sections that apply.</p>
       </div>
 
       <SectionCard title="Walls">
@@ -41,7 +41,7 @@ export default function FramingCalculator() {
           <SelectField label="Stud Spacing" value={spacing} onChange={setSpacing} options={SPACING_OPTIONS} />
         </div>
 
-        <p className="text-sm font-medium text-slate-700 mb-2">Wall Lengths</p>
+        <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Wall Lengths</p>
         <div className="flex flex-col gap-2">
           {walls.map((wall, i) => (
             <div key={wall.id} className="flex items-center gap-2">
@@ -53,7 +53,7 @@ export default function FramingCalculator() {
                 min={0}
                 step="any"
                 placeholder="length"
-                className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-full bg-white"
+                className="border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-full bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
               />
               <span className="text-xs text-slate-400 w-4 shrink-0">ft</span>
               {walls.length > 1 && (
