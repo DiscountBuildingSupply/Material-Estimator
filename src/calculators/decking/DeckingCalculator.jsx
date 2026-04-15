@@ -40,8 +40,8 @@ export default function DeckingCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Decking</h2>
-        <p className="text-sm text-slate-500 mt-1">Estimate composite decking, framing, hardware, and concrete for a pressure treated deck structure.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Decking</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Estimate composite decking, framing, hardware, and concrete for a pressure treated deck structure.</p>
       </div>
 
       <SectionCard title="Deck Dimensions">
@@ -71,7 +71,7 @@ export default function DeckingCalculator() {
               className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
             />
             <div>
-              <span className="text-sm text-slate-700">Attached to house (ledger mount)</span>
+              <span className="text-sm text-slate-700 dark:text-slate-300">Attached to house (ledger mount)</span>
               <p className="text-xs text-slate-400 mt-0.5">Adds a 2×10 ledger board and reduces post rows on the house side.</p>
             </div>
           </label>
@@ -83,7 +83,7 @@ export default function DeckingCalculator() {
               className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
             />
             <div>
-              <span className="text-sm text-slate-700">Pressure treated framing lumber</span>
+              <span className="text-sm text-slate-700 dark:text-slate-300">Pressure treated framing lumber</span>
               <p className="text-xs text-slate-400 mt-0.5">PT stock available up to 16′. Uncheck for KD/untreated (up to 24′).</p>
             </div>
           </label>

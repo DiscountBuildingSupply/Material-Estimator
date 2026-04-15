@@ -51,8 +51,8 @@ export default function ConcreteCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Concrete / Masonry</h2>
-        <p className="text-sm text-slate-500 mt-1">Estimate concrete volume, rebar, CMU blocks, and scratch-mixed mortar or concrete.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Concrete / Masonry</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Estimate concrete volume, rebar, CMU blocks, and scratch-mixed mortar or concrete.</p>
       </div>
 
       <SectionCard title="Project Type">

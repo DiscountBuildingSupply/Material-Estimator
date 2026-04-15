@@ -31,8 +31,8 @@ export default function RoofingCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Roofing</h2>
-        <p className="text-sm text-slate-500 mt-1">Calculate shingles, underlayment, ice & water shield, and nails for a gable roof.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Roofing</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Calculate shingles, underlayment, ice & water shield, and nails for a gable roof.</p>
       </div>
 
       <SectionCard title="Roof Dimensions">

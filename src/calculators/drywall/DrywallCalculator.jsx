@@ -43,8 +43,8 @@ export default function DrywallCalculator() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-800">Drywall / Insulation</h2>
-        <p className="text-sm text-slate-500 mt-1">Estimate sheets, mud, tape, screws, and insulation for a single room.</p>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Drywall / Insulation</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Estimate sheets, mud, tape, screws, and insulation for a single room.</p>
       </div>
 
       <SectionCard title="Room Dimensions">
