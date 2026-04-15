@@ -1,0 +1,1 @@
+For anyone that stumbles on this, this is a simple Material Estimator for various types of building material we run into at our store. Feel free to copy and use yourself, or just use it at https://discountbuildingsupply.github.io/Material-Estimator
